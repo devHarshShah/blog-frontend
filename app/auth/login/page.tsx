@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
 const Login = () => {
@@ -19,11 +20,13 @@ const Login = () => {
 
     if (response.status === 400) {
       alert('Invalid Password');
-    } else if(response.ok){
+    } else if (response.ok) {
+      const data = await response.json();
+      const token = data.token;
+      Cookies.set('jwtToken=', token);
       alert('Login Success');
       router.push('/');
     }
-
   };
 
   return (
