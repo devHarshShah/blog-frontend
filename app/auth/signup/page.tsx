@@ -24,7 +24,7 @@ const Login = () => {
     });
 
     if (response.status === 400) {
-      alert('Invalid Password');
+      alert('User Exists');
     } else if (response.ok) {
       alert('Sign Up Success');
       router.push('/auth/login');
@@ -77,9 +77,9 @@ const Login = () => {
             </button>
             <div className="mt-6 text-center">
               <p className="text-zinc-400 mt-2">
-                Dont have an account?{' '}
-                <Link href="/auth/signup" className="text-blue-400">
-                  Sign Up
+                Aldready have an account?{' '}
+                <Link href="/auth/login" className="text-blue-400">
+                  Login
                 </Link>
               </p>
             </div>
