@@ -2,26 +2,26 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'; // Corrected from 'next/navigation'
 import Link from 'next/link';
+import Cookies from 'js-cookie';
 
 const Navbar = () => {
   const router = useRouter();
   const [cookieExists, setCookieExists] = useState<boolean | null>(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isDropdownOpen1, setIsDropdownOpen1] = useState(false);
 
-  // Event handler to toggle dropdown visibility
-  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-  const toggleDropdown1 = () => setIsDropdownOpen1(!isDropdownOpen1);
-
-  function hasCookie(cookieName: string): boolean {
+  function hasCookie(): boolean {
     if (typeof window === 'undefined') {
       return false;
     }
-    return document.cookie
-      .split(';')
-      .map((entry) => entry.split('='))
-      .some(([name, value]) => name.trim() === cookieName && !!value);
+    const storedJwtToken = Cookies.get('jwtToken=');
+    if (storedJwtToken === '' || !storedJwtToken) {
+      return false;
+    }
+    return true;
   }
+
+  useEffect(() => {
+    setCookieExists(hasCookie());
+  }, []);
 
   function deleteCookie(event: React.MouseEvent<HTMLButtonElement>): void {
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';

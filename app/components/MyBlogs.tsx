@@ -16,11 +16,10 @@ interface Blog {
   created_at: string;
 }
 
-const Blogs: React.FC = () => {
+const MyBlogs: React.FC = () => {
   const router = useRouter();
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [authors, setAuthors] = useState<Author[]>([]);
-  const [selectedAuthor, setSelectedAuthor] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -31,7 +30,7 @@ const Blogs: React.FC = () => {
         if (storedJwtToken === '' || !storedJwtToken) {
           router.push('/auth/login');
         }
-        const url = selectedAuthor ? `http://localhost:8000/api/v1/blog/posts?author=${selectedAuthor}` : 'http://localhost:8000/api/v1/blog/posts';
+        const url = 'http://localhost:8000/api/v1/blog/myposts';
         const response = await fetch(url, {
           headers: {
             Authorization: `Bearer ${storedJwtToken}`,
@@ -56,7 +55,7 @@ const Blogs: React.FC = () => {
     };
 
     fetchBlogs();
-  }, [selectedAuthor]);
+  }, []);
 
   if (loading) {
     return <div className="flex justify-center items-center h-screen">Loading...</div>;
@@ -68,20 +67,8 @@ const Blogs: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center mb-8">Blogs</h1>
-      <div className="mb-4">
-        <label htmlFor="author" className="block text-lg font-medium text-gray-700 mb-2">
-          Sort by Author:
-        </label>
-        <select id="author" value={selectedAuthor} onChange={(e) => setSelectedAuthor(e.target.value)} className="block text-black w-full md:w-[10%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-          <option value="">All Authors</option>
-          {authors.map((author) => (
-            <option key={author?._id} value={author?._id}>
-              {author?.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <h1 className="text-4xl font-bold text-center mb-8">My Blogs</h1>
+
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogs.map((blog) => (
           <li key={blog.id} className="bg-white shadow-md rounded-lg p-6">
@@ -98,4 +85,4 @@ const Blogs: React.FC = () => {
   );
 };
 
-export default Blogs;
+export default MyBlogs;
