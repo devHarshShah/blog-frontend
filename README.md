@@ -33,10 +33,6 @@ git clone https://github.com/devHarshShah/blog-backend
 ```
 # Web Interface (Frontend)
 
-## Environment Variables
-
-Copy the `env.sample` file to `.env` and customize it according to your needs. This file contains environment variables used by the frontend.
-
 ## Running the Frontend
 
 To run the Attack Capital frontend, follow these steps:
