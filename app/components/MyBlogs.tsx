@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 interface Author {
@@ -9,7 +10,7 @@ interface Author {
 }
 
 interface Blog {
-  id: string;
+  _id: string;
   title: string;
   content: string;
   author: Author;
@@ -57,6 +58,33 @@ const MyBlogs: React.FC = () => {
     fetchBlogs();
   }, []);
 
+  const handleDelete = async (id: string) => {
+    const storedJwtToken = Cookies.get('jwtToken=');
+    if (storedJwtToken === '' || !storedJwtToken) {
+      router.push('/auth/login');
+    }
+    console.log(id);
+    const response = await fetch(`http://localhost:8000/api/v1/blog/post?id=${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${storedJwtToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Failed to delete blog');
+    }
+    alert('Blog deleted successfully');
+    router.refresh();
+  };
+
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.substring(0, maxLength) + '...';
+  };
+
   if (loading) {
     return <div className="flex justify-center items-center h-screen">Loading...</div>;
   }
@@ -66,17 +94,25 @@ const MyBlogs: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container w-[80%] mx-auto p-4">
       <h1 className="text-4xl font-bold text-center mb-8">My Blogs</h1>
 
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogs.map((blog) => (
-          <li key={blog.id} className="bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-2xl font-semibold mb-4 text-black">{blog.title}</h2>
-            <p className="text-gray-700 mb-4">{blog.content}</p>
-            <div className="text-sm text-gray-500">
+          <li key={blog._id} className="bg-white shadow-md rounded-lg p-6 relative h-[50vh]">
+            <h2 className="text-2xl font-semibold mb-2 text-black">{blog.title}</h2>
+            <p className="text-gray-700 mb-2">{truncateText(blog.content, 300)}</p>
+            <div className="text-sm text-gray-500 mb-6">
               <p>Author: {blog.author.name}</p>
               <p>Created At: {new Date(blog.created_at).toLocaleString()}</p>
+            </div>
+            <div className="flex flex-row space-x-2 w-full absolute bottom-0 py-2">
+              <Link href={`/blog/${blog._id}`}>
+                <button className="px-2 py-1 bg-blue-600 rounded-lg mt-6 mb-2">Read More</button>
+              </Link>
+              <button onClick={(e) => (handleDelete(blog._id))} className="px-2 py-1 bg-red-600 rounded-lg mt-6 mb-2">
+                Delete
+              </button>
             </div>
           </li>
         ))}

@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation'; // Corrected from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
 
@@ -24,17 +24,17 @@ const Navbar = () => {
   }, []);
 
   function deleteCookie(event: React.MouseEvent<HTMLButtonElement>): void {
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    Cookies.remove('jwtToken=');
     router.push('/');
   }
 
   return (
-    <nav className="text-white p-4 bg-[#0101272d] px-6">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-lg font-bold flex flex-row justify-center items-center">
+    <nav className="text-white p-4 bg-[#0101272d] px-6 border-1 border-[#E25037]">
+      <div className="container mx-auto flex flex-wrap justify-between items-center">
+        <div className="text-lg font-bold flex flex-row justify-center items-center w-full md:w-auto">
           <p className="mt-2">I-Blogs</p>
         </div>
-        <ul className="flex space-x-4 ml-16">
+        <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 ml-0 md:ml-16 w-full md:w-auto">
           {/* Public links */}
           <li>
             <Link href="/" className="hover:text-zinc-400">
@@ -47,7 +47,7 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <div className="flex space-x-4 items-center">
+        <div className="flex space-x-4 items-center w-full md:w-auto justify-center md:justify-end mt-2 md:mt-0">
           {cookieExists ? (
             <button onClick={deleteCookie} className="bg-[#E25037] text-white px-4 py-2 rounded-lg">
               Logout

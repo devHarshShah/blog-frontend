@@ -63,9 +63,9 @@ const AddBlog: React.FC = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-4xl font-bold text-center mb-8">Add Blog</h1>
-      <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
+      <form onSubmit={handleSubmit} className="w-[80%] mx-auto">
         <div className="mb-4">
-          <label htmlFor="title" className="block text-lg font-medium text-gray-700 mb-2">Title</label>
+          <label htmlFor="title" className="block text-lg font-medium text-white mb-2">Title</label>
           <input
             type="text"
             id="title"
@@ -76,7 +76,7 @@ const AddBlog: React.FC = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="content" className="block text-lg font-medium text-gray-700 mb-2">Content</label>
+          <label htmlFor="content" className="block text-lg font-medium text-white mb-2">Content</label>
           <textarea
             id="content"
             value={content}
