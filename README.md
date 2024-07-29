@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Overview
 
-## Getting Started
+This repository contains the codebase for the personal blog platform developed as part of the task. The platform allows users to sign up, log in, and post blog posts. Users can view all posts and filter them by author. The backend is built using Node.js and Express, while the frontend uses Next.js 14 with TypeScript.
+ 
+## Task Description
 
-First, run the development server:
+Develop a personal blog platform where users can sign up, log in, and post articles. The platform should allow users to view all posts and filter them by author. The backend should be built using Node.js and Express, and the frontend should use Next.js 14 with TypeScript.
+
+## Technologies Used
+
+#### Frontend
+
+- **Language:** TypeScript
+- **Framework:** Next.js
+- **CSS Framework:** Tailwind CSS
+
+#### Backend
+
+- **Language:** Typescript
+- **Web Framework:** Express
+- **ORM:** Mongoose
+- **Databases:** MongoDB (main database)
+
+## Usage
+
+To utilize the Attack Capital personal blog website, follow these steps:
+
+#### - Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/devHarshShah/blog-frontend
+git clone https://github.com/devHarshShah/blog-backend
 ```
+# Web Interface (Frontend)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy the `env.sample` file to `.env` and customize it according to your needs. This file contains environment variables used by the frontend.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Running the Frontend
 
-## Learn More
+To run the Attack Capital frontend, follow these steps:
 
-To learn more about Next.js, take a look at the following resources:
+1. Open a terminal and navigate to the root directory of the frontend.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Run the following commands:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```bash
+    npm install
+    npm run build
+    npm run start
+    ```
 
-## Deploy on Vercel
+5. The application will be accessible at `http://localhost:3000` by default.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Screenshots
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+*Sign Up*
+
+![Sign up](screenshots/signup.png)
+
+*Login*
+
+![Login](screenshots/login.png)
+
+*Home page view*
+
+![Home page](screenshots/home.png)
+
+*Dashboard view*
+
+![Dashboard page](screenshots/dashboard.png)
+
+*Create Post view*
+
+![Create post](screenshots/dashboard-continue.png)
+
+Best Regards,
+Harsh Shah
